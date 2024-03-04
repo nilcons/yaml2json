@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "lib": ["ESNext", "DOM"],
+    "module": "esnext",
+    "target": "esnext",
+    "moduleResolution": "node",
+    "allowJs": false,
+    "newLine": "lf",
+    "esModuleInterop": false,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "name": "yaml2json",
+  "version": "0.0.1",
+  "description": "YAML to/from JSON converter",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nilcons/yaml2json.git"
+  },
+  "author": "Mihaly Barasz <klao@nilcons.com>",
+  "license": "UNLICENSED",
+  "scripts": {
+    "build": "esbuild src/code.ts --outdir=public --bundle --minify",
+    "start": "esbuild src/code.ts --outdir=public --bundle --sourcemap --servedir=public",
+    "clean": "bash -c 'rm -f public/code.js{,.map}'"
+  },
+  "dependencies": {
+    "@codemirror/state": "^6.4.0",
+    "@codemirror/view": "^6.23.1",
+    "codemirror": "^6.0.1"
+  },
+  "devDependencies": {
+    "esbuild": "^0.17.11"
+  }
+}
