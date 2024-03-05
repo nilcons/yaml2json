@@ -6,7 +6,8 @@ import { yaml } from "@codemirror/lang-yaml";
 import { json } from "@codemirror/lang-json";
 
 import { parse, stringify } from "yaml";
-const yparse = (s: string) => parse(s, { version: '1.1' });
+let yamlVersion: "1.1" | "1.2" = "1.1";
+const yparse = (s: string) => parse(s, { version: yamlVersion });
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -15,6 +16,7 @@ const jsonElem = document.getElementById("ed-json")!;
 const messageElem = document.getElementById("message")!;
 const messageTextElem = document.getElementById("message-text")!;
 const closeMessageElem = document.getElementById("close-message")!;
+const yamlVersionElem = document.getElementById("yaml-version")! as HTMLSelectElement;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Examples:
@@ -120,3 +122,7 @@ function closeMessage() {
 }
 
 closeMessageElem.addEventListener("click", closeMessage);
+
+yamlVersionElem.addEventListener("change", () => {
+    yamlVersion = yamlVersionElem.value as "1.1" | "1.2";
+});
