@@ -26,7 +26,10 @@ sequence:
   - orange
   - 2.5
 `;
-const jsonExample = JSON.stringify(parse(yamlExample), null, 2);
+const initialValue = parse(yamlExample);
+const jsonExample = JSON.stringify(initialValue, null, 2);
+
+let currentValue: string | undefined = JSON.stringify(initialValue);
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -38,6 +41,9 @@ const yamlPlugin = ViewPlugin.fromClass(class {
         if (!update.transactions.some(tr => tr.annotation(Transaction.userEvent))) return;
         try {
             const value = parse(update.view.state.doc.toString());
+            const s = JSON.stringify(value);
+            if (s === currentValue) return;
+            currentValue = s;
             jsonView.dispatch({
                 changes: {
                     from: 0,
@@ -46,6 +52,7 @@ const yamlPlugin = ViewPlugin.fromClass(class {
                 },
             });
         } catch (e) {
+            currentValue = undefined;
             console.error("YAML parse failed", e);
         }
     }
@@ -61,6 +68,9 @@ const jsonPlugin = ViewPlugin.fromClass(class {
         if (!update.transactions.some(tr => tr.annotation(Transaction.userEvent))) return;
         try {
             const value = JSON.parse(update.view.state.doc.toString());
+            const s = JSON.stringify(value);
+            if (s === currentValue) return;
+            currentValue = s;
             yamlView.dispatch({
                 changes: {
                     from: 0,
@@ -69,6 +79,7 @@ const jsonPlugin = ViewPlugin.fromClass(class {
                 },
             });
         } catch (e) {
+            currentValue = undefined;
             console.error("JSON parse failed", e);
         }
     }
