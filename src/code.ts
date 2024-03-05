@@ -25,10 +25,12 @@ map:
   one: 1
   true: true
   foo: bar
-sequence:
+sequence: &copy
   - apple
   - orange
   - 2.5
+repeated:
+  sequence: *copy
 `;
 const initialValue = yparse(yamlExample);
 const jsonExample = JSON.stringify(initialValue, null, 2);
