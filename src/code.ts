@@ -11,6 +11,9 @@ import { parse, stringify } from "yaml";
 
 const yamlElem = document.getElementById("ed-yaml")!;
 const jsonElem = document.getElementById("ed-json")!;
+const messageElem = document.getElementById("message")!;
+const messageTextElem = document.getElementById("message-text")!;
+const closeMessageElem = document.getElementById("close-message")!;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Examples:
@@ -99,3 +102,16 @@ const jsonView = new EditorView({
     extensions: [extensions, json(), jsonPlugin],
     parent: jsonElem,
 });
+
+////////////////////////////////////////////////////////////////////////////////
+
+function showMessage(message: string) {
+    messageTextElem.textContent = message;
+    messageElem.classList.remove("hidden");
+}
+
+function closeMessage() {
+    messageElem.classList.add("hidden");
+}
+
+closeMessageElem.addEventListener("click", closeMessage);
