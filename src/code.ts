@@ -6,6 +6,7 @@ import { yaml } from "@codemirror/lang-yaml";
 import { json } from "@codemirror/lang-json";
 
 import { parse, stringify } from "yaml";
+const yparse = (s: string) => parse(s, { version: '1.1' });
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -29,7 +30,7 @@ sequence:
   - orange
   - 2.5
 `;
-const initialValue = parse(yamlExample);
+const initialValue = yparse(yamlExample);
 const jsonExample = JSON.stringify(initialValue, null, 2);
 
 let currentValue: string | undefined = JSON.stringify(initialValue);
@@ -43,7 +44,7 @@ const yamlPlugin = ViewPlugin.fromClass(class {
         if (!update.docChanged) return;
         if (!update.transactions.some(tr => tr.annotation(Transaction.userEvent))) return;
         try {
-            const value = parse(update.view.state.doc.toString());
+            const value = yparse(update.view.state.doc.toString());
             const s = JSON.stringify(value);
             if (s === currentValue) return;
             currentValue = s;
