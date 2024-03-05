@@ -41,29 +41,33 @@ let currentValue: string | undefined = JSON.stringify(initialValue);
 
 ////////////////////////////////////////////////////////////////////////////////
 
+const yamlUpdate = (update: ViewUpdate) => {
+    try {
+        const value = yparse(update.view.state.doc.toString());
+        const s = JSON.stringify(value);
+        if (s === currentValue) return;
+        currentValue = s;
+        jsonView.dispatch({
+            changes: {
+                from: 0,
+                to: jsonView.state.doc.length,
+                insert: JSON.stringify(value, null, 2),
+            },
+        });
+        closeMessage();
+    } catch (e) {
+        currentValue = undefined;
+        showMessage("" + e);
+    }
+};
+
 const yamlPlugin = ViewPlugin.fromClass(class {
     constructor(_view: EditorView) { }
 
     update(update: ViewUpdate) {
         if (!update.docChanged) return;
         if (!update.transactions.some(tr => tr.annotation(Transaction.userEvent))) return;
-        try {
-            const value = yparse(update.view.state.doc.toString());
-            const s = JSON.stringify(value);
-            if (s === currentValue) return;
-            currentValue = s;
-            jsonView.dispatch({
-                changes: {
-                    from: 0,
-                    to: jsonView.state.doc.length,
-                    insert: JSON.stringify(value, null, 2),
-                },
-            });
-            closeMessage();
-        } catch (e) {
-            currentValue = undefined;
-            showMessage("" + e);
-        }
+        yamlUpdate(update);
     }
 });
 
@@ -125,4 +129,5 @@ closeMessageElem.addEventListener("click", closeMessage);
 
 yamlVersionElem.addEventListener("change", () => {
     yamlVersion = yamlVersionElem.value as "1.1" | "1.2";
+    yamlUpdate({ view: yamlView }); // TODO: what's the proper CodeMirror way to do this???
 });
