@@ -46,6 +46,7 @@ body {
 }
 
 .message {
+    position: relative;
     background-color: #e55;
     color: #fff;
     font-family: sans-serif;
