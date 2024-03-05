@@ -29,6 +29,7 @@ body {
     display: flex;
     flex: 1;
     flex-direction: row;
+    overflow: auto; /* Wow, this was the fix, but why??? */
     /* Question: how do we tell flexbox here that (.editors + .message) together has to fit vertically into .editors-with-error??? */
 }
 
@@ -41,7 +42,7 @@ body {
 .editors > .editor > div {
     border: 1px solid black;
     flex: 1;
-    overflow-y: auto;
+    overflow: auto;
 }
 
 .message {
