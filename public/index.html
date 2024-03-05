@@ -25,19 +25,21 @@
             Kubernetes uses YAML 1.1.
         </p>
     </div>
-    <div class="editors">
-        <div class="editor">
-            <h2>YAML</h2>
-            <div id="ed-yaml"></div>
+    <div class="editors-with-error">
+        <div class="editors">
+            <div class="editor">
+                <h2>YAML</h2>
+                <div id="ed-yaml"></div>
+            </div>
+            <div class="editor">
+                <h2>JSON</h2>
+                <div id="ed-json"></div>
+            </div>
         </div>
-        <div class="editor">
-            <h2>JSON</h2>
-            <div id="ed-json"></div>
+        <div class="message hidden" id="message">
+            <div id="close-message">x</div>
+            <pre id="message-text"></pre>
         </div>
-    </div>
-    <div class="message hidden" id="message">
-        <div id="close-message">x</div>
-        <pre id="message-text"></pre>
     </div>
 
     <script src="code.js?v=VERZS"></script>
