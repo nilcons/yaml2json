@@ -54,9 +54,10 @@ const yamlPlugin = ViewPlugin.fromClass(class {
                     insert: JSON.stringify(value, null, 2),
                 },
             });
+            closeMessage();
         } catch (e) {
             currentValue = undefined;
-            console.error("YAML parse failed", e);
+            showMessage("" + e);
         }
     }
 });
@@ -81,9 +82,10 @@ const jsonPlugin = ViewPlugin.fromClass(class {
                     insert: stringify(value),
                 },
             });
+            closeMessage();
         } catch (e) {
             currentValue = undefined;
-            console.error("JSON parse failed", e);
+            showMessage("JSON: " + e);
         }
     }
 });

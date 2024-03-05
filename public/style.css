@@ -47,5 +47,8 @@ body {
     right: 8px;
     cursor: pointer;
     border: 1px solid #fff;
-    padding: 0 2px;
+    padding: 0 4px;
+}
+.message > pre {
+    margin: 0;
 }
