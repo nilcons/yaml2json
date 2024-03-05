@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YAML 2 JSON</title>
-    <link rel="stylesheet" href="style.css?v=2">
+    <link rel="stylesheet" href="style.css?v=3">
 </head>
 
 <body>
@@ -13,10 +13,17 @@
         <h1>YAML ↔ JSON</h1>
         <p>Convert YAML to JSON and vice versa.</p>
         <p>
-            To move between the editors press <kbd>Escape</kbd>-<em>then</em>-<kbd>Tab</kbd> or
-            <kbd>Escape</kbd>-<em>then</em>-<kbd>Shift+Tab</kbd>.
+            To move from the YAML editor to JSON press <kbd>Escape</kbd>-<em>then</em>-<kbd>Tab</kbd>.<br>
+            To move from the JSON editor to YAML press <kbd>Escape</kbd>-<em>then</em>-<kbd>Shift+Tab</kbd>.
         </p>
-        <p>Lorem ipsum about YAML and JSON, dolor sit amet consectetur adipisicing elit. Nisi temporibus porro impedit nulla placeat unde nihil ducimus cupiditate laboriosam dolore labore cum veniam voluptates ad deserunt, culpa iure itaque beatae?</p>
+        <p>
+            YAML version:
+            <select id="yaml-version">
+                <option value="1.1">1.1</option>
+                <option value="1.2">1.2</option>
+            </select><br>
+            Kubernetes uses YAML 1.1.
+        </p>
     </div>
     <div class="editors">
         <div class="editor">
@@ -33,7 +40,7 @@
         <pre id="message-text"></pre>
     </div>
 
-    <script src="code.js?v=2" type="module"></script>
+    <script src="code.js?v=3"></script>
 </body>
 
 </html>
