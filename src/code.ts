@@ -26,15 +26,7 @@ sequence:
   - orange
   - 2.5
 `;
-const jsonExample = `{
-  "map": {
-    "key": "value",
-    "one": 1,
-    "true": true,
-    "foo": "bar"
-  },
-  "sequence": ["apple", "orange", 2.5]
-}`;
+const jsonExample = JSON.stringify(parse(yamlExample), null, 2);
 
 ////////////////////////////////////////////////////////////////////////////////
 
