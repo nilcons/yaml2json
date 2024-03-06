@@ -36,6 +36,7 @@ body {
 
 .message {
     position: relative;
+    overflow-x: scroll;
     background-color: #e55;
     color: #fff;
     font-family: sans-serif;
@@ -65,13 +66,12 @@ body {
     body {
         grid-template-columns: 1fr;
         height: initial;
-        padding-bottom: 8rem;
     }
     .editors-with-error {
         max-height: initial;
     }
     .editors-with-error > .message {
-        position: fixed;
+        position: sticky;
         left: 0;
         right: 0;
         bottom: 0;
