@@ -1,9 +1,8 @@
-import { basicSetup } from "codemirror";
-import { EditorView, ViewPlugin, ViewUpdate, keymap } from "@codemirror/view";
+import { EditorView, ViewPlugin, ViewUpdate } from "@codemirror/view";
 import { Transaction } from "@codemirror/state";
-import { indentWithTab } from "@codemirror/commands";
 import { yaml } from "@codemirror/lang-yaml";
 import { json } from "@codemirror/lang-json";
+import { ourSetup } from "./cmsetup";
 
 import { parse, stringify } from "yaml";
 let yamlVersion: "1.1" | "1.2" = "1.1";
@@ -101,7 +100,7 @@ const jsonPlugin = ViewPlugin.fromClass(class {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-const extensions = [basicSetup, keymap.of([indentWithTab])];
+const extensions = [ourSetup];
 const yamlView = new EditorView({
     doc: yamlExample,
     extensions: [extensions, yaml(), yamlPlugin],
