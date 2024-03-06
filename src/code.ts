@@ -21,16 +21,16 @@ const yamlVersionElem = document.getElementById("yaml-version")! as HTMLSelectEl
 ////////////////////////////////////////////////////////////////////////////////
 // Examples:
 const yamlExample = `---
-# Comment
 map:
   key: value
   one: 1
-  true: true
+  bool: true
   foo: bar
 sequence: &copy
   - apple
   - orange
   - 2.5
+# Comment: YAML supports copy-paste built-in, yay!
 repeated:
   sequence: *copy
 `;
