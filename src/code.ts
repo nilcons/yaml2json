@@ -113,6 +113,17 @@ const jsonView = new EditorView({
     parent: jsonElem,
 });
 
+window.addEventListener('keydown', function(event: KeyboardEvent) {
+    if (event.key === 'F1' || event.code === 'F1') {
+        event.preventDefault();
+        yamlView.focus();
+    }
+    if (event.key === 'F2' || event.code === 'F2') {
+        event.preventDefault();
+        jsonView.focus();
+    }
+});
+
 ////////////////////////////////////////////////////////////////////////////////
 
 function showMessage(message: string) {

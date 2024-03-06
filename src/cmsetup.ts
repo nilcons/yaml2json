@@ -1,5 +1,5 @@
 import { lineNumbers, highlightActiveLineGutter, highlightSpecialChars, drawSelection, highlightActiveLine, keymap } from '@codemirror/view';
-import { history, defaultKeymap, historyKeymap } from '@codemirror/commands';
+import { history, defaultKeymap, historyKeymap, indentWithTab } from '@codemirror/commands';
 import { highlightSelectionMatches } from '@codemirror/search';
 import { indentOnInput, syntaxHighlighting, defaultHighlightStyle, bracketMatching } from '@codemirror/language';
 export const ourSetup = [
@@ -10,6 +10,7 @@ export const ourSetup = [
     keymap.of([
         ...defaultKeymap,
         ...historyKeymap,
+        indentWithTab,
         //     ...closeBracketsKeymap,
         //     ...searchKeymap,
         //     ...foldKeymap,
