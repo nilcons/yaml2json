@@ -14,7 +14,6 @@ const yamlElem = document.getElementById("ed-yaml")!;
 const jsonElem = document.getElementById("ed-json")!;
 const messageElem = document.getElementById("message")!;
 const messageTextElem = document.getElementById("message-text")!;
-const closeMessageElem = document.getElementById("close-message")!;
 const yamlVersionElem = document.getElementById("yaml-version")! as HTMLSelectElement;
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -134,8 +133,6 @@ function showMessage(message: string) {
 function closeMessage() {
     messageElem.classList.add("hidden");
 }
-
-closeMessageElem.addEventListener("click", closeMessage);
 
 yamlVersionElem.addEventListener("change", () => {
     yamlVersion = yamlVersionElem.value as "1.1" | "1.2";
