@@ -1,48 +1,37 @@
-html {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    position: relative;
+*, *::before, *::after {
+    box-sizing: border-box;
 }
 
 body {
-    margin: 0;
-    padding: 0 8px;
-    display: flex;
-    flex-direction: row;
-    flex: 1;
-}
-
-.notes {
-    flex: 1;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.5rem;
+    /* This is the default in basically every browser, but we depend on it, so it's here explicitly */
+    margin: 8px;
 }
 
 .editors-with-error {
-    flex: 3;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
+    display: grid;
+    /* This could be expressed as 100cqb, if body were a container of the 'size' type with explicit height… */
+    /* But, it's an additional complication, not supported everywhere, and it's not worth it */
+    max-height: calc(100vh - 16px); /* 100vh - body margin */
 }
 
 .editors {
-    display: flex;
-    flex: 1;
-    flex-direction: row;
-    overflow: auto; /* Wow, this was the fix, but why??? */
-    /* Question: how do we tell flexbox here that (.editors + .message) together has to fit vertically into .editors-with-error??? */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr;
+    grid-auto-flow: column;
+    overflow-y: auto;
 }
 
-.editors > .editor {
-    flex: 1;
-    flex-direction: column;
-    display: flex
-}
-
-.editors > .editor > div {
+.editor {
     border: 1px solid black;
-    flex: 1;
     overflow: auto;
+}
+.cm-scroller {
+    /* We allow x scrolling on the .editor, and it's better to have both scrollbars on the same element */
+    overflow-x: initial!important;
 }
 
 .message {
@@ -53,7 +42,7 @@ body {
     font-size: large;
     font-weight: 500;
     padding: 10px;
-    margin: 15px;
+    margin-top: 15px;
     border-radius: 5px;
     padding-right: 1.5em;
 }
@@ -70,4 +59,29 @@ body {
 }
 .message > pre {
     margin: 0;
+}
+
+@media (max-width: 1200px) {
+    body {
+        grid-template-columns: 1fr;
+        height: initial;
+        padding-bottom: 8rem;
+    }
+    .editors-with-error {
+        max-height: initial;
+    }
+    .editors-with-error > .message {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: 8px;
+    }
+}
+
+@media (max-width: 800px) {
+    .editors {
+        grid-template-columns: 1fr;
+        grid-auto-flow: row;
+    }
 }
