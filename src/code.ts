@@ -39,9 +39,9 @@ let currentValue: string | undefined = JSON.stringify(initialValue);
 
 ////////////////////////////////////////////////////////////////////////////////
 
-const yamlUpdate = (update: ViewUpdate) => {
+const yamlUpdate = (yamlInput: string) => {
     try {
-        const value = yparse(update.view.state.doc.toString());
+        const value = yparse(yamlInput);
         const s = JSON.stringify(value);
         if (s === currentValue) return;
         currentValue = s;
@@ -65,7 +65,7 @@ const yamlPlugin = ViewPlugin.fromClass(class {
     update(update: ViewUpdate) {
         if (!update.docChanged) return;
         if (!update.transactions.some(tr => tr.annotation(Transaction.userEvent))) return;
-        yamlUpdate(update);
+        yamlUpdate(update.view.state.doc.toString());
     }
 });
 
@@ -136,5 +136,5 @@ function closeMessage() {
 
 yamlVersionElem.addEventListener("change", () => {
     yamlVersion = yamlVersionElem.value as "1.1" | "1.2";
-    yamlUpdate({ view: yamlView } as ViewUpdate);
+    yamlUpdate(yamlView.state.doc.toString());
 });
