@@ -88,7 +88,7 @@ const jsonPlugin = ViewPlugin.fromClass(class {
                 changes: {
                     from: 0,
                     to: yamlView.state.doc.length,
-                    insert: stringify(value),
+                    insert: "---\n" + stringify(value),
                 },
             });
             closeMessage();
