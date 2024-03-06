@@ -129,5 +129,5 @@ closeMessageElem.addEventListener("click", closeMessage);
 
 yamlVersionElem.addEventListener("change", () => {
     yamlVersion = yamlVersionElem.value as "1.1" | "1.2";
-    yamlUpdate({ view: yamlView }); // TODO: what's the proper CodeMirror way to do this???
+    yamlUpdate({ view: yamlView } as ViewUpdate);
 });
