@@ -22,6 +22,10 @@ body {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto 1fr;
     grid-auto-flow: column;
+    /* TODO: This is still a mystery.
+       It never gets scroll bars, but this is needed for the two editors to get them.
+       How does this 'overflow' chaining work?
+    */
     overflow-y: auto;
 }
 
