@@ -1,5 +1,5 @@
-import { EditorView, ViewPlugin, ViewUpdate } from "@codemirror/view";
-import { Transaction } from "@codemirror/state";
+import { Decoration, DecorationSet, EditorView, ViewPlugin, ViewUpdate } from "@codemirror/view";
+import { RangeSetBuilder, Text, Transaction } from "@codemirror/state";
 import { yaml } from "@codemirror/lang-yaml";
 import { json } from "@codemirror/lang-json";
 import { ourSetup } from "./cmsetup";
@@ -98,16 +98,23 @@ let currentValue: string | undefined = JSON.stringify(initialValue);
 
 ////////////////////////////////////////////////////////////////////////////////
 
-const sideUpdate = (yamlSide: boolean, input: string) => {
-    const r = parse(yamlSide, input);
+const sideUpdate = (yamlSide: boolean, input: Text): DecorationSet => {
+    const r = parse(yamlSide, input.toString());
     if (r.errorMessage) {
         showMessage(r.errorMessage);
         currentValue = undefined;
-        // console.log(r.errorLine);
-        return;
+
+        const builder = new RangeSetBuilder<Decoration>();
+        if (r.errorLine !== undefined) {
+            const line = input.line(r.errorLine);
+            if (line) {
+                builder.add(line.from, line.from, lineError);
+            }
+        }
+        return builder.finish();
     }
     const s = JSON.stringify(r.value);
-    if (s === currentValue) return;
+    if (s === currentValue) return Decoration.none;
     currentValue = s;
     const otherView = yamlSide ? jsonView : yamlView;
     otherView.dispatch({
@@ -118,18 +125,26 @@ const sideUpdate = (yamlSide: boolean, input: string) => {
         },
     });
     closeMessage();
+    return Decoration.none;
 };
 
 ////////////////////////////////////////////////////////////////////////////////
+const lineError = Decoration.line({ class: "cm-error" });
+const sideTheme = EditorView.baseTheme({
+    ".cm-error": { backgroundColor: "#fbb" },
+});
 
 const sidePlugin = (yamlSide: boolean) => ViewPlugin.fromClass(class {
+    decorations: DecorationSet = Decoration.none;
     constructor(_view: EditorView) { }
 
     update(update: ViewUpdate) {
         if (!update.docChanged) return;
         if (!update.transactions.some(tr => tr.annotation(Transaction.userEvent))) return;
-        sideUpdate(yamlSide, update.view.state.doc.toString());
+        this.decorations = sideUpdate(yamlSide, update.view.state.doc);
     }
+}, {
+    decorations: v => v.decorations,
 });
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -137,13 +152,13 @@ const sidePlugin = (yamlSide: boolean) => ViewPlugin.fromClass(class {
 const extensions = [ourSetup];
 const yamlView = new EditorView({
     doc: yamlExample,
-    extensions: [extensions, yaml(), sidePlugin(true)],
+    extensions: [extensions, yaml(), sideTheme, sidePlugin(true)],
     parent: yamlElem,
 });
 
 const jsonView = new EditorView({
     doc: jsonExample,
-    extensions: [extensions, json(), sidePlugin(false)],
+    extensions: [extensions, json(), sideTheme, sidePlugin(false)],
     parent: jsonElem,
 });
 
@@ -173,7 +188,7 @@ closeMessageElem.addEventListener("click", closeMessage);
 
 yamlVersionElem.addEventListener("change", () => {
     yamlVersion = yamlVersionElem.value as "1.1" | "1.2";
-    sideUpdate(true, yamlView.state.doc.toString());
+    sideUpdate(true, yamlView.state.doc);
 });
 
 ////////////////////////////////////////////////////////////////////////////////
