@@ -26,7 +26,7 @@
     "@codemirror/state": "^6.4.0",
     "@codemirror/view": "^6.23.1",
     "codemirror": "^6.0.1",
-    "yaml": "^2.4.0"
+    "yaml": "git://github.com/nilcons-contrib/yaml.git#fix-off-build"
   },
   "devDependencies": {
     "esbuild": "^0.17.11"
