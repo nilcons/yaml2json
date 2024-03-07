@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YAML ↔ JSON</title>
-    <link rel="stylesheet" href="style.css?v=7">
+    <link rel="stylesheet" href="style.css?v=8">
 </head>
 
 <body>
@@ -28,9 +28,15 @@
     </div>
     <div class="editors-with-error">
         <div class="editors">
-            <h2>YAML</h2>
+            <div class="header">
+                <span class="title">YAML</span>
+                <span id="copy-yaml" class="button">copy</span>
+            </div>
             <div id="ed-yaml" class="editor"></div>
-            <h2>JSON</h2>
+            <div class="header">
+                <span class="title">JSON</span>
+                <span id="copy-json" class="button">copy</span>
+            </div>
             <div id="ed-json" class="editor"></div>
         </div>
         <div class="message hidden" id="message">
@@ -39,7 +45,7 @@
         </div>
     </div>
 
-    <script src="code.js?v=7"></script>
+    <script src="code.js?v=8"></script>
 </body>
 
 </html>
