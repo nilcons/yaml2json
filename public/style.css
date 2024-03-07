@@ -43,6 +43,9 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 8px 2rem;
+    border: 1px solid black;
+    background-color: #eee;
+    margin-top: 8px;
 }
 .title {
     font-size: 1.5em;
