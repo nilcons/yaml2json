@@ -55,7 +55,7 @@ body {
 
 .message {
     position: relative;
-    overflow-x: scroll;
+    overflow-x: auto;
     background-color: #e55;
     color: #fff;
     font-family: sans-serif;
