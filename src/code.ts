@@ -141,3 +141,12 @@ yamlVersionElem.addEventListener("change", () => {
     yamlVersion = yamlVersionElem.value as "1.1" | "1.2";
     yamlUpdate(yamlView.state.doc.toString());
 });
+
+////////////////////////////////////////////////////////////////////////////////
+
+document.getElementById("copy-yaml")!.addEventListener("click", () => {
+    navigator.clipboard.writeText(yamlView.state.doc.toString());
+});
+document.getElementById("copy-json")!.addEventListener("click", () => {
+    navigator.clipboard.writeText(jsonView.state.doc.toString());
+});
