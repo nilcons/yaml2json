@@ -7,6 +7,10 @@
     "url": "git+https://github.com/nilcons/yaml2json.git"
   },
   "author": "Mihaly Barasz <klao@nilcons.com>",
+  "contributors": [
+    "Mihaly Barasz <klao@nilcons.com>",
+    "Gergely Risko <errge@nilcons.com>"
+  ],
   "license": "UNLICENSED",
   "scripts": {
     "build": "esbuild src/code.ts --outdir=public --bundle --minify",
