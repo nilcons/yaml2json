@@ -38,6 +38,11 @@ body {
     overflow-x: initial!important;
 }
 
+.cm-focused {
+    /* This outline behaves weirdly in the shorter editor and if horizontal scrolling is needed */
+    outline: initial!important;
+}
+
 .header {
     display: flex;
     justify-content: space-between;
