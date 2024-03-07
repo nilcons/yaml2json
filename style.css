@@ -22,6 +22,10 @@ body {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto 1fr;
     grid-auto-flow: column;
+    /* TODO: This is still a mystery.
+       It never gets scroll bars, but this is needed for the two editors to get them.
+       How does this 'overflow' chaining work?
+    */
     overflow-y: auto;
 }
 
@@ -39,6 +43,9 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 8px 2rem;
+    border: 1px solid black;
+    background-color: #eee;
+    margin-top: 8px;
 }
 .title {
     font-size: 1.5em;
@@ -87,10 +94,7 @@ body {
     }
     .editors-with-error > .message {
         position: sticky;
-        left: 0;
-        right: 0;
         bottom: 0;
-        margin: 8px;
     }
 }
 
