@@ -15,8 +15,8 @@ if [[ "$(git rev-parse origin/master)" != "$(git rev-parse master)" ]]; then
     echo >&2 Warning: git branch not merged: origin/master != master
 fi
 
-if [[ "$(git rev-parse origin/gh-pages)" != "$(git rev-parse gh-pages)" ]]; then
-    echo >&2 Warning: git branch not  merged: origin/gh-pages != gh-pages
+if [[ "$(git rev-parse origin/self-contained)" != "$(git rev-parse self-contained)" ]]; then
+    echo >&2 Warning: git branch not  merged: origin/self-contained != self-contained
 fi
 
 BUILDDIR=$(mktemp -d ./build-XXXXX)
